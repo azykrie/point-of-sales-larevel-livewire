@@ -30,49 +30,7 @@
     {{-- MAIN --}}
     <x-main>
         {{-- SIDEBAR --}}
-        <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
-
-            {{-- BRAND --}}
-            <x-app-brand class="px-5 pt-4" />
-
-            {{-- MENU --}}
-            <x-menu activate-by-route>
-
-                {{-- User --}}
-                @if ($user = auth()->user())
-                    <x-menu-separator />
-                    <x-list-item :item="$user" value="name" sub-value="email" avatar="avatar_url" no-separator
-                        no-hover class="-mx-2 !-my-2 rounded">
-                        <x-slot:actions>
-                            <x-dropdown>
-                                <x-slot:trigger>
-                                    <x-button icon="o-cog" class="btn-circle" />
-                                </x-slot:trigger>
-
-                                {{-- Logout --}}
-                                <livewire:auth.logout />
-
-                                {{-- Theme Menu --}}
-                                <x-menu-item title="Theme" icon="o-swatch" @click="$dispatch('mary-toggle-theme')" />
-
-                                {{-- Theme toggle --}}
-                                <x-theme-toggle class="hidden" />
-
-                            </x-dropdown>
-                        </x-slot:actions>
-
-                    </x-list-item>
-
-                    <x-menu-separator />
-                @endif
-                <x-menu-item title="Dashboard" icon="o-chart-pie" link="/admin/dashboard" />
-                <x-menu-item title="Users" icon="o-user" link="/admin/users" />
-                <x-menu-sub title="Wearehouse" icon="o-cog-6-tooth">
-                    <x-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-menu-sub>
-            </x-menu>
-        </x-slot:sidebar>
+        <x-partials.sidebar />
 
         {{-- The `$slot` goes here --}}
         <x-slot:content>

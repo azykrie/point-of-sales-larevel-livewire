@@ -12,15 +12,29 @@ class Login extends Component
     public $email;
     public $password;
 
-    public function login(){
+    public function login()
+    {
         $this->validate([
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
+            $user = Auth::user();
+
             session()->flash('message', 'Login successful!');
-            return redirect()->route('admin.dashboard.index');
+
+            // Redirect sesuai role
+            if ($user->role === 'admin') {
+                return redirect()->route('admin.dashboard.index');
+            } elseif ($user->role === 'warehouse') {
+                return redirect()->route('warehouse.dashboard.index');
+            }
+
+            Auth::logout();
+            session()->flash('error', 'Unauthorized role.');
+            return redirect()->route('login');
+
         } else {
             session()->flash('error', 'Invalid credentials. Please try again.');
         }

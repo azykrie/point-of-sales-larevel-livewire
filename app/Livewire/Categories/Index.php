@@ -1,23 +1,22 @@
 <?php
 
-namespace App\Livewire\Users;
+namespace App\Livewire\Categories;
 
-use App\Models\User;
 use Livewire\Attributes\Title;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\WithPagination;
 
-#[Title("Users")]
+
+#[Title("Categories")]
 class Index extends Component
 {
-
     use WithPagination;
-    public $search = '';
+
+    public $search = "";
     public $headers = [
         ['key' => 'id', 'label' => 'ID'],
-        ['key' => 'name', 'label' => 'Name'],
-        ['key' => 'email', 'label' => 'Email'],
-        ['key'=> 'role', 'label'=> 'Role'],
+        ['key' => 'name', 'label' => 'Category Name'],
     ];
 
     public $sortBy = [
@@ -33,26 +32,18 @@ class Index extends Component
     }
 
     public function delete($id){
-        $user = User::find($id);
-        $user->delete();
-
-        $this->dispatch('success', message: 'User deleted successfully!');
+        Category::find($id)->delete();
+        $this->dispatch('success', message:'Category deleted successfully!');
     }
-
     public function render()
     {
-
-        $users = User::query()
+        $categories = Category::query()
             ->when($this->search, function ($query) {
-                $query->where('name', 'like', "%{$this->search}%")
-                    ->orWhere('email', 'like', "%{$this->search}%")
-                    ->orWhere('role', 'like', "%{$this->search}%");
+                $query->where('name', 'like', '%' . $this->search . '%');
             })
             ->orderBy($this->sortBy['column'], $this->sortBy['direction'])
             ->paginate(10);
 
-        return view('livewire.users.index', [
-            'users' => $users,
-        ]);
+        return view('livewire.categories.index', compact('categories'));
     }
 }

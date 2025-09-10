@@ -11,12 +11,13 @@ use Livewire\WithFileUploads;
 class Create extends Component
 {
     use WithFileUploads;
-    public $email, $name, $password, $password_confirmation, $avatars;
+    public $email, $name, $password, $password_confirmation, $avatars, $role;
 
     public $roles = [
         ["name"=> "Select Role", "id" => ""],
         ["name" => "Admin", "id" => "admin"],
-        ["name" => "User", "id" => "user"],
+        ["name" => "Warehouse", "id" => "warehouse"],
+        ["name" => "Cashier", "id" => "cashier"],
         ["name" => "Manager", "id" => "manager"],
     ];
 
@@ -26,6 +27,7 @@ class Create extends Component
             'name' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed',
             'avatars' => 'nullable|image|max:1024',
+            'role' => 'required|in:admin,warehouse,cashier,manager',
         ]);
 
         $avatarsPath = $this->avatars ? $this->avatars->store('avatars', 'public') : null;
@@ -35,6 +37,7 @@ class Create extends Component
             'name' => $this->name,
             'avatars' => $avatarsPath,
             'password' => bcrypt($this->password),
+            'role' => $this->role,
         ]);
 
         return redirect()->route('admin.users.index')->with('success', 'User created successfully.');

@@ -13,8 +13,14 @@ class Edit extends Component
 {
     use WithFileUploads;
 
-    public $userId, $name , $email, $password, $password_confirmation, $avatars = null, $oldAvatar;
-
+    public $userId, $name, $email, $password, $password_confirmation, $avatars = null, $oldAvatar, $role;
+    public $roles = [
+        ["name" => "Select Role", "id" => ""],
+        ["name" => "Admin", "id" => "admin"],
+        ["name" => "Warehouse", "id" => "warehouse"],
+        ["name" => "Cashier", "id" => "cashier"],
+        ["name" => "Manager", "id" => "manager"],
+    ];
 
     public function mount($id)
     {
@@ -23,6 +29,7 @@ class Edit extends Component
         $this->userId = $user->id;
         $this->name = $user->name;
         $this->email = $user->email;
+        $this->role = $user->role;
 
         $this->oldAvatar = $user->avatars;
     }
@@ -34,12 +41,15 @@ class Edit extends Component
             'email' => 'required|email|unique:users,email,' . $this->userId,
             'avatars' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'password' => 'nullable|min:6|confirmed',
+            'role' => 'required|in:admin,warehouse,cashier,manager',
         ]);
 
         $user = User::findOrFail($this->userId);
 
         $user->name = $this->name;
         $user->email = $this->email;
+        $user->role = $this->role;
+
 
         if ($this->avatars) {
             $path = $this->avatars->store('avatars', 'public');

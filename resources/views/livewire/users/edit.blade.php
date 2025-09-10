@@ -8,11 +8,9 @@
     <x-form wire:submit="update">
         <x-input label="Full name" wire:model="name" error-field="name" />
         <x-input label="Email" wire:model="email" error-field="email" />
-
-        {{-- Upload avatar baru --}}
+        <x-select label="Role" :options="$roles" wire:model="role" error-field="role" />
         <x-file label="Image" wire:model="avatars" accept="image/png, image/jpeg, image/jpg" />
 
-        {{-- Preview jika upload baru --}}
         @if ($avatars && method_exists($avatars, 'temporaryUrl'))
             <div class="mt-4">
                 <p>Image Preview:</p>
@@ -26,8 +24,6 @@
         @endif
 
 
-
-        {{-- Password opsional saat edit --}}
         <x-input label="Password (leave blank if not changing)" type="password" wire:model="password"
             error-field="password" />
         <x-input label="Password Confirmation" type="password" wire:model="password_confirmation"
