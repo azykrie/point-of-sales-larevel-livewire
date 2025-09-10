@@ -4,9 +4,11 @@ namespace App\Livewire\Users;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
+#[Title("User Edit")]
 class Edit extends Component
 {
     use WithFileUploads;
