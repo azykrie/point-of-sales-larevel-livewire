@@ -13,14 +13,7 @@
 <body class="min-h-screen font-sans antialiased bg-base-200">
 
     {{-- TOP ALERT --}}
-    @if (session('success'))
-        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)" class="fixed top-4 right-4 z-50">
-            <x-alert class="alert-success shadow-lg rounded-lg px-4 py-2 inline-flex items-center gap-2 w-auto">
-                <x-icon name="o-check" class="w-5 h-5" />
-                <span>{{ session('success') }}</span>
-            </x-alert>
-        </div>
-    @endif
+    <x-notifications.toast />
 
     {{-- NAVBAR mobile only --}}
     <x-nav sticky class="lg:hidden">

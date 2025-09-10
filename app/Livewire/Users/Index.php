@@ -31,8 +31,16 @@ class Index extends Component
         }
     }
 
+    public function delete($id){
+        $user = User::find($id);
+        $user->delete();
+
+        $this->dispatch('success', message: 'User deleted successfully!');
+    }
+
     public function render()
     {
+
         $users = User::query()
             ->when($this->search, function ($query) {
                 $query->where('name', 'like', "%{$this->search}%")
