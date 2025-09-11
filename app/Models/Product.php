@@ -15,6 +15,12 @@ class Product extends Model
         'category_id'
     ];
 
+    protected $attributes = [
+        'purchase_price' => 0,
+        'selling_price' => 0,
+        'stock' => 0,
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);

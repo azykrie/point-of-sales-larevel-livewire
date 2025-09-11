@@ -25,6 +25,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::get('suppliers', App\Livewire\Suppliers\Index::class)->name('suppliers.index');
     Route::get('suppliers/create', App\Livewire\Suppliers\Create::class)->name('suppliers.create');
     Route::get('suppliers/edit/{id}', App\Livewire\Suppliers\Edit::class)->name('suppliers.edit');
+    Route::get('purchases', App\Livewire\Purchases\Index::class)->name('purchases.index');
+    Route::get('purchases/create', App\Livewire\Purchases\Create::class)->name('purchases.create');
+    Route::get('purchases/edit/{id}', App\Livewire\Purchases\Edit::class)->name('purchases.edit');
+    Route::get('purchases/show/{id}', App\Livewire\Purchases\Show::class)->name('purchases.show');
 });
 
 
@@ -41,4 +45,8 @@ Route::prefix('warehouse')->name('warehouse.')->middleware(['auth', 'role:wareho
     Route::get('suppliers', App\Livewire\Suppliers\Index::class)->name('suppliers.index');
     Route::get('suppliers/create', App\Livewire\Suppliers\Create::class)->name('suppliers.create');
     Route::get('suppliers/edit/{id}', App\Livewire\Suppliers\Edit::class)->name('suppliers.edit');
+    Route::get('purchases', App\Livewire\Purchases\Index::class)->name('purchases.index');
+    Route::get('purchases/create', App\Livewire\Purchases\Create::class)->name('purchases.create');
+    Route::get('purchases/edit/{id}', App\Livewire\Purchases\Edit::class)->name('purchases.edit');
+    Route::get('purchases/show/{id}', App\Livewire\Purchases\Show::class)->name('purchases.show');
 });

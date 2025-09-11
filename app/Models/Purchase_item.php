@@ -13,4 +13,14 @@ class Purchase_item extends Model
         'price',
         'subtotal'
     ];
+
+    public function purchase()
+    {
+        return $this->belongsTo(Purchase::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

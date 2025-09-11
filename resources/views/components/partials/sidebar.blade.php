@@ -41,7 +41,7 @@
             <x-menu-item title="Categories" icon="o-hashtag" link="/admin/categories" />
             <x-menu-item title="Products" icon="o-cube" link="/admin/products" />
             <x-menu-item title="Suppliers" icon="o-users" link="/admin/suppliers" />
-            <x-menu-item title="Purchases" icon="o-shopping-cart" link="####" />
+            <x-menu-item title="Purchases" icon="o-shopping-cart" link="/admin/purchases" />
             <x-menu-item title="Sales" icon="o-shopping-cart" link="####" />
             <x-menu-item title="Returns" icon="o-archive-box" link="####" />
         @endif
@@ -52,7 +52,7 @@
             <x-menu-item title="Categories" icon="o-hashtag" link="/warehouse/categories" />
             <x-menu-item title="Products" icon="o-cube" link="/warehouse/products" />
             <x-menu-item title="Suppliers" icon="o-users" link="/warehouse/suppliers" />
-            <x-menu-item title="Purchases" icon="o-shopping-cart" link="####" />
+            <x-menu-item title="Purchases" icon="o-shopping-cart" link="/warehouse/purchases" />
         @endif
     </x-menu>
 </x-slot:sidebar>
