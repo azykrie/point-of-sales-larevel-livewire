@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Livewire\Auth;
 
 use Illuminate\Support\Facades\Auth;
@@ -15,8 +14,8 @@ class Login extends Component
     public function login()
     {
         $this->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
+            'email'    => 'required|email',
+            'password' => 'required|',
         ]);
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
@@ -26,13 +25,13 @@ class Login extends Component
 
             // Redirect sesuai role
             if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard.index');
+                return redirect()->route('admin.dashboard.index')->with('success', 'Login successful!');
             } elseif ($user->role === 'warehouse') {
-                return redirect()->route('warehouse.dashboard.index');
+                return redirect()->route('warehouse.dashboard.index')->with('success', 'Login successful!');
             } elseif ($user->role === 'cashier') {
-                return redirect()->route('cashier.dashboard.index');
-            }elseif ($user->role === 'manager') {
-                return redirect()->route('manager.dashboard.index');
+                return redirect()->route('cashier.dashboard.index')->with('success', 'Login successful!');
+            } elseif ($user->role === 'manager') {
+                return redirect()->route('manager.dashboard.index')->with('success', 'Login successful!');
             }
 
             Auth::logout();
