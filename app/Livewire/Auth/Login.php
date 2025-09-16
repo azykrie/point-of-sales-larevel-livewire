@@ -29,6 +29,10 @@ class Login extends Component
                 return redirect()->route('admin.dashboard.index');
             } elseif ($user->role === 'warehouse') {
                 return redirect()->route('warehouse.dashboard.index');
+            } elseif ($user->role === 'cashier') {
+                return redirect()->route('cashier.dashboard.index');
+            }elseif ($user->role === 'manager') {
+                return redirect()->route('manager.dashboard.index');
             }
 
             Auth::logout();

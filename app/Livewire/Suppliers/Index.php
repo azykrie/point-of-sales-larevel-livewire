@@ -22,6 +22,13 @@ class Index extends Component
         'column' => 'name',
         'direction' => 'asc',
     ];
+
+    public function delete($id){
+
+        Supplier::findOrFail($id)->delete();
+
+        $this->dispatch('success', message: 'Supplier deleted successfully!');
+    }
     public function render()
     {
         $suppliers = Supplier::query()

@@ -17,6 +17,22 @@
                             <x-button icon="o-cog" class="btn-circle" />
                         </x-slot:trigger>
 
+                        {{-- Profile --}}
+                        @if ($user->role === 'admin')
+                            <x-menu-item title="Profile" icon="o-user"
+                                link="{{ route('admin.users.profile', $user->id) }}" />
+                        @elseif ($user->role === 'manager')
+                            <x-menu-item title="Profile" icon="o-user"
+                                link="{{ route('manager.users.profile', $user->id) }}" />
+                        @elseif ($user->role === 'cashier')
+                            <x-menu-item title="Profile" icon="o-user"
+                                link="{{ route('cashier.users.profile', $user->id) }}" />
+                        @elseif ($user->role === 'warehouse')
+                            <x-menu-item title="Profile" icon="o-user"
+                                link="{{ route('warehouse.users.profile', $user->id) }}" />
+                        @endif
+
+
                         {{-- Logout --}}
                         <livewire:auth.logout />
 
@@ -42,8 +58,21 @@
             <x-menu-item title="Products" icon="o-cube" link="/admin/products" />
             <x-menu-item title="Suppliers" icon="o-users" link="/admin/suppliers" />
             <x-menu-item title="Purchases" icon="o-shopping-cart" link="/admin/purchases" />
-            <x-menu-item title="Sales" icon="o-shopping-cart" link="####" />
-            <x-menu-item title="Returns" icon="o-archive-box" link="####" />
+            <x-menu-item title="Sales" icon="o-shopping-bag" link="/admin/sales" />
+            <x-menu-item title="Stock Movement" icon="o-archive-box" link="/admin/stock-movements" />
+        @endif
+
+        {{-- Manager Menu --}}
+        @if ($user && $user->role === 'manager')
+            <x-menu-item title="Dashboard" icon="o-chart-pie" link="/manager/dashboard" />
+            <x-menu-item title="Sales" icon="o-shopping-bag" link="/manager/sales" />
+            <x-menu-item title="Stock Movement" icon="o-archive-box" link="/manager/stock-movements" />
+        @endif
+
+        {{-- Cashier Menu --}}
+        @if ($user && $user->role === 'cashier')
+            <x-menu-item title="Dashboard" icon="o-chart-pie" link="/cashier/dashboard" />
+            <x-menu-item title="Sales" icon="o-shopping-bag" link="/cashier/sales" />
         @endif
 
         {{-- Warehouse Menu --}}
@@ -53,6 +82,7 @@
             <x-menu-item title="Products" icon="o-cube" link="/warehouse/products" />
             <x-menu-item title="Suppliers" icon="o-users" link="/warehouse/suppliers" />
             <x-menu-item title="Purchases" icon="o-shopping-cart" link="/warehouse/purchases" />
+            <x-menu-item title="Stock Movement" icon="o-archive-box" link="/warehouse/stock-movements" />
         @endif
     </x-menu>
 </x-slot:sidebar>

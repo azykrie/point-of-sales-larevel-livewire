@@ -13,4 +13,14 @@ class Sale_item extends Model
         'price',
         'subtotal'
     ];
+
+    public function sale()
+    {
+        return $this->belongsTo(Sale::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
